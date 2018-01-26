@@ -24,7 +24,7 @@ Motor motor2 = Motor(BIN1, BIN2, PWMB, offsetB, STBY);
 // Servos Variables
 Servo servos1; 
 Servo servos2;
-int SERVOS_1_PIN = 11;
+int SERVOS_1_PIN = 10;
 
 // Serial Variables
 int incomingByte = 0;   
@@ -82,18 +82,18 @@ void loop() {
       Serial.println("Left");
       turnLeft();
     }
-    delay(100);
+    delay(80);
     brake(motor1, motor2);
   }
 
 }
 
 void lowerArm() {
-  servos1.write(180);
+  servos1.write(150);
 }
 
 void raiseArm() {
-  servos1.write(50);
+  servos1.write(90);
 }
 
 void releaseBall() {
@@ -109,11 +109,11 @@ void moveBackward() {
 }
 
 void turnRight() {
-  right(motor1, motor2, 50);
+  right(motor1, motor2, 70);
 }
 
 void turnLeft() {
-  left(motor1, motor2, 50);
+  left(motor1, motor2, 70);
 }
 
 
