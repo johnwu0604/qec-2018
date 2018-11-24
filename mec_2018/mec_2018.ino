@@ -1,5 +1,6 @@
 #include <Servo.h>
 
+// enable pins
 const int EN_L = 8;
 const int EN_R = 3;
 
@@ -14,6 +15,7 @@ const int INB_R = 5;
 // speed
 int currentSpeed = 255;
 
+// servos variables
 Servo servos1; 
 int SERVOS_PIN = 10;
 
@@ -22,7 +24,7 @@ int incomingByte = 0;
 
 void setup() {
         Serial.begin(9600); 
-
+    
         servos1.attach(SERVOS_PIN);
         servos1.write(90);
         
@@ -61,12 +63,16 @@ void loop() {
       decreaseSpeed();
     }
 
-    if (incomingByte == 109) { //m
+    if (incomingByte == 114) { //r
       raiseArm();
     }
 
-    if (incomingByte == 110) { //n
+    if (incomingByte == 102) { //f
       lowerArm();
+    }
+
+    if (incomingByte == 32) { // spacebar
+      raiseArmFast();
     }
 
     delay(20);
@@ -127,14 +133,21 @@ void stopMotors() {
 void lowerArm() {
   Serial.print("Lower arm");
   servos1.write(50);
-  delay(10);
+  delay(15);
   servos1.write(90);
 }
 
 void raiseArm() {
   Serial.print("Raise arm");
   servos1.write(130);
-  delay(10);
+  delay(15);
+  servos1.write(90);
+}
+
+void raiseArmFast() {
+  Serial.print("Raise arm");
+  servos1.write(130);
+  delay(60);
   servos1.write(90);
 }
 
